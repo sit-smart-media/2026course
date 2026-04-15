@@ -31,9 +31,8 @@
 以下をインストール・設定しておいてください（前回の uv セットアップが済んでいること）。
 
 ```bash
-uv init agent-lab
-cd agent-lab
-uv add langchain langgraph langsmith langchain-openai python-dotenv
+uv sync
+cd 2回目
 ```
 
-OpenAI API キーまたは Anthropic API キーも必要です。先生から配布されたキーを使ってください。
+API キーなどの環境変数は必要です。配布されたキーを使ってください。
