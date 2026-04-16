@@ -12,3 +12,8 @@ dependencies = [
     "langchain-openai>=1.1.13",
     "openai>=2.31.0",
 ]
+
+[tool.uv.workspace]
+members = [
+    "1回目/src/myproject",
+]

@@ -86,7 +86,7 @@ cd my-project
 my-project/
 ├── pyproject.toml    ← プロジェクトの設定ファイル
 ├── README.md
-└── hello.py          ← サンプルスクリプト
+└── main.py          ← サンプルスクリプト
 ```
 
 ### 既存のフォルダでプロジェクトを初期化
