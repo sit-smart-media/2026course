@@ -17,7 +17,7 @@ client = OpenAI(
 response = client.chat.completions.create(
     model=os.getenv("LLM_MODEL"),
     messages=[
-        {"role": "user", "content": "Write a Python function to reverse a list."}
+        {"role": "user", "content": "リストを逆順にするPython関数を作成してください."}
     ]
 )
 
