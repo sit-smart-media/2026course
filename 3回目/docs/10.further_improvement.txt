@@ -1,0 +1,34 @@
+残り改善案（効果順）                                                                                                                                        
+                                                                                                                                                              
+  A. データ・前処理層                                                                                                                                         
+                                                                                                                                                              
+  1. ASR 段で改善が本筋 — 校正は最後の手段。01_asr_*.py 側で WhisperX の language="ja" 明示、initial_prompt に用語リスト注入、vad_filter=True、beam_size=5。  
+  2. 音声前処理 — ノイズ除去（noisereduce）、無音トリム、16kHz mono 統一。録音段の品質が CER の天井。
+  3. 数字・英字混在の正規化 — "16回"/"１６回"/"16times" を統一規則で固定。reference 側にも同規則。                                                            
+  4. 辞書を外出し — data/glossary.yaml に用語＋誤認識ペア。プロンプト生成時に読み込む。授業ごとに差し替え可能。                                               
+                                                                                                                                                              
+  B. 評価層                                                                                                                                                   
+                                                                                                                                                              
+  5. 複数 reference 区間 — 全文 1 ファイルでなく、セグメント単位（30秒区切り）で CER を取り、悪い区間特定。results/04_per_segment.csv。                       
+  6. エラー種別集計 — jiwer の process_words で sub/ins/del 内訳を取り、最頻誤りトップ10 を出す → glossary 追加候補が機械的に出る。
+  7. bootstrap 信頼区間 — variant 間差が誤差範囲か判定（小サンプルでは必須）。                                                                                
+  8. diff 可視化 — results/04_diff_<variant>.html に色分け差分。手で見て次の prompt 設計に回す。                                                              
+                                                                                                                                                              
+  C. プロンプト・モデル層                                                                                                                                     
+                                                                                                                                                              
+  9. 2-pass 校正 — pass1 で用語修正、pass2 で句読点・改行整形。役割分離で副作用減。                                                                           
+  10. モデル比較 — 同 prompt で別モデル（小→大）の CER 差を CSV に。コスト/精度カーブ作成。
+  11. temperature/seed 固定再現 — 既に 0.0、seed パラメータも付ければ完全再現。                                                                               
+  12. 長文は要約禁止を明示 — 「省略・要約・整形・敬語化を禁止」と system に追記。LLM 校正の最大事故源。                                                       
+  13. constrained decoding — JSON で {"corrected": "..."} を強制 → 余計な前置きが消える。                                                                     
+                                                                                                                                                              
+  D. 運用層                                                                                                                                                   
+                                                                                                                                                              
+  14. WhisperX の word timestamp 活用 — confidence 低い word のみ LLM に投げる。コスト 1/10、誤介入も減る。                                                   
+  15. CI 化 — make wer で全 variant 回す Makefile。学生が小変更ごと回せる。
+  16. leaderboard 出力 — 04_wer_log.csv を読んで variant×CER 表を Markdown で吐く小スクリプト。                                                               
+                                                                                                                                                              
+  優先順                                                                                                                                                      
+                                                                                                                                                              
+  学生課題としての ROI: 6（誤り集計）→ 14（confidence ベース）→ 5（区間 CER）→ 4（外部 glossary）。                                                           
+  6 が最も学びになる: データ駆動で次の prompt が決まる流れを体験できる。

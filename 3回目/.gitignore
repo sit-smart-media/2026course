@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+results/*.txt
+results/*.json
+results/*.csv
+results/*.md
+!results/.gitkeep
+.ipynb_checkpoints/

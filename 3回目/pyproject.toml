@@ -1,0 +1,17 @@
+[project]
+name = "course3-asr-llm"
+version = "0.1.0"
+description = "3回目: ASR + LLM で音声認識精度を上げる"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "whisperx>=3.1.1",
+    "openai>=1.40.0",
+    "python-dotenv>=1.0.0",
+    "jiwer>=3.0.0",
+    "torch>=2.0.0",
+    "torchaudio>=2.0.0",
+    "fugashi[unidic-lite]>=1.5.2",
+]
+
+[tool.uv]
+package = false

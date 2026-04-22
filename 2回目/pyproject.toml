@@ -13,7 +13,5 @@ dependencies = [
     "openai>=2.31.0",
 ]
 
-[tool.uv.workspace]
-members = [
-    "1回目/src/myproject",
-]
+[tool.uv]
+package = false

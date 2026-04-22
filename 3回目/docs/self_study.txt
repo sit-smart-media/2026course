@@ -1,0 +1,26 @@
+ セルフ1（90分）— 03_validation.py 中心、Level 2 到達
+
+    1. 02_asr_llm_corrected.txt を入力に 03_validation.py 実行
+    2. 03_validation_report.json の中身を読む:
+      - naive_added / llm_added / alignment_of_added を比較
+      - score 低い語＝幻覚候補と判定する練習
+    3. 元音声を聞いて、疑わしい語が実在するか耳で検証
+    4. レポート: どの語が幻覚で、どの語が真の補正か理由付きで分類
+
+    セルフ2（90分）— 04_accuracy.py 中心、Level 3 到達
+
+    1. reference 作成: 01_asr_raw.txt を手修正 → results/04_reference.txt に保存（正解作り自体が学び）
+    2. variant ループ:
+      - --variant strict / with_glossary / fewshot / reflect を順に実行
+      - --all で一括も可
+    3. CSV 分析: 04_wer_log.csv の CER/WER/len_ratio を比較し、どの prompt が効いたか定量判断
+    4. prompt 改造: 自分で新 variant 追加（用語追加・few-shot 例追加・制約変更）→ 再測定
+    5. レポート: 改善理由を仮説→実験→結果の流れで記述
+
+    共通の学び所
+
+    - LLM 出力を盲信せず検証ループで確認する設計思考
+    - 主観評価でなく CER/score で意思決定する習慣
+    - prompt は仮説実験の単位であり、変えたら必ず測る
+
+
