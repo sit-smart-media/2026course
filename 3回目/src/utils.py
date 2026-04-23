@@ -14,7 +14,7 @@ DATA = ROOT / "data"
 RESULTS = ROOT / "results"
 RESULTS.mkdir(exist_ok=True)
 
-SAMPLE_AUDIO = DATA / "sample.mp4"
+SAMPLE_AUDIO = DATA / "sample.mp3"
 
 
 @dataclass

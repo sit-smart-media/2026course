@@ -52,11 +52,10 @@ def transcribe(
     full_text = " ".join(seg["text"].strip() for seg in aligned["segments"])
     return ASRResult(text=full_text, segments=aligned["segments"], language=detected_lang)
 
-
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--audio", default=str(SAMPLE_AUDIO))
-    parser.add_argument("--model", default="large-v3")
+    parser.add_argument("--model", default="large-v3")  
     parser.add_argument("--language", default=None, help="ja / en / None(auto)")
     args = parser.parse_args()
 
