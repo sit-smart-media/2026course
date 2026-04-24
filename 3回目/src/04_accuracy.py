@@ -197,7 +197,7 @@ def print_row(row: dict) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--raw", default=str(RESULTS / "01_asr_raw.txt"))
+    parser.add_argument("--raw", default=str(RESULTS / "01_1_asr_raw.txt"))
     parser.add_argument(
         "--reference", default=str(RESULTS / "04_reference.txt"),
         help="手修正した正解テキスト",
